@@ -1,0 +1,46 @@
+<div class="panel-heading">
+  <strong>Total Income:</strong> {{currency totalIncome}}
+</div>
+
+<div class="panel-body">
+    <div class="btn-group btn-group-xs">
+      <a href="#" {{bind-attr class=":btn :btn-default isHidden::disabled"}}{{action 'showTable'}}>
+        <span class="glyphicon glyphicon-plus"></span> Show Table
+      </a>
+      <a href="#" {{bind-attr class=":btn :btn-default isHidden:disabled"}} {{action 'hideTable'}}>
+        <span class="glyphicon glyphicon-minus"></span> Hide Table
+      </a>
+    </div>
+    <div {{bind-attr class=":btn-group :btn-group-xs isHidden:hidden"}}>
+      <a href="#" {{bind-attr class=":btn :btn-default isMaxedOut:disabled"}}{{action 'incrementRows'}}>
+        <span class="glyphicon glyphicon-plus"></span> Add Row
+      </a>
+      <a href="#" {{bind-attr class=":btn :btn-default isBottomedOut:disabled"}} {{action 'decrementRows'}}>
+        <span class="glyphicon glyphicon-minus"></span> Remove Row
+      </a>
+    </div>
+</div>
+
+<table {{bind-attr class=":table :income-table isHidden:hidden"}}>
+  <tbody>
+    {{#loop 7}}
+    <tr class="income-table-row">
+      {{#loop 5}}
+      <td>
+        <div class="form-group" {{action "validateInput" on="keyup"}}>
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <input type="number"
+              {{action "adjustIncome" on="change"}} 
+              class="form-control income-amount"
+              min="0"
+              placeholder="Income"
+            >
+          </div>
+        </div>
+      </td>
+      {{/loop}}
+    </tr>
+    {{/loop}}
+  </tbody>
+</table>
