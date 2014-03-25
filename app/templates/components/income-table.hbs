@@ -5,10 +5,10 @@
 <div class="panel-body">
     <div class="btn-group btn-group-xs">
       <a href="#" {{bind-attr class=":btn :btn-default isHidden::disabled"}}{{action 'showTable'}}>
-        <span class="glyphicon glyphicon-plus"></span> Show Table
+        <span class="glyphicon glyphicon-eye-open"></span> Show Table
       </a>
       <a href="#" {{bind-attr class=":btn :btn-default isHidden:disabled"}} {{action 'hideTable'}}>
-        <span class="glyphicon glyphicon-minus"></span> Hide Table
+        <span class="glyphicon glyphicon-eye-close"></span> Hide Table
       </a>
     </div>
     <div {{bind-attr class=":btn-group :btn-group-xs isHidden:hidden"}}>
@@ -19,6 +19,9 @@
         <span class="glyphicon glyphicon-minus"></span> Remove Row
       </a>
     </div>
+    <a href="#" {{bind-attr class=":btn :btn-default :btn-xs isHidden:hidden"}} {{action 'clearTable'}}>
+      <span class="glyphicon glyphicon-trash"></span> Clear and Reset
+    </a>
 </div>
 
 <table {{bind-attr class=":table :income-table isHidden:hidden"}}>
