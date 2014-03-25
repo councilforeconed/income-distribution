@@ -5,14 +5,6 @@ IncomeDistribution.IncomeTableComponent = Ember.Component.extend({
   rows: 5,
   isHidden: true,
 
-  totalIncome: function () {
-    var data = this.get('data');
-    if (!data.length) return 0;
-    return data.reduce(function (previous, current) {
-      return previous + current;
-    }, 0);
-  }.property('data'),
-
   changeRows: function () {
     var rows = this.get('rows');
     this.$('.income-table-row').slice(0, rows).show();
