@@ -21,9 +21,15 @@ svg {
 }
 
 .lorenz-line {
+  fill: none;
   stroke: rgb(47, 184, 255);
   stroke-linecap: round;
   stroke-width: 3px;
+}
+
+.line-of-perfect-equity {
+  stroke: rgb(200,200,200);
+  stroke-dasharray: 5;
 }
 
 .axis path,

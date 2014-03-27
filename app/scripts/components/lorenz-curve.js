@@ -26,6 +26,9 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
       return quintile + d3.sum(data.slice(0, index));
      });
      
+     // Prepend the data to account for 0% of the population.
+     lorenzifiedData.unshift(0);
+     
      return lorenzifiedData;
      
   }.property('data'),
@@ -33,13 +36,25 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
   updateChart: function () {
     
     var id = this.$().attr('id');
+    var data = this.get('lorenzifiedData');
     
-    this.get('path')
-      .datum(this.get('lorenzifiedData'))
-      .transition()
-        .duration(750)
-        .ease("linear")
-      .attr('d', this.get('line'));
+    // If the data doesn't is free of NaNs, update the graph.
+    if (!_.some(data, _.isNaN)) {
+      this.get('path')
+        .datum(data)
+        .transition()
+          .duration(750)
+          .ease("linear")
+        .attr('d', this.get('line'));
+    } else {
+      this.get('path')
+        .datum([0,0,0,0,0,0])
+        .transition()
+          .duration(750)
+          .ease("linear")
+        .attr('d', this.get('line'));
+    }
+    
          
   }.observes('lorenzifiedData'),
   
@@ -60,7 +75,7 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
       });
 
     var xScale = d3.scale.ordinal()
-      .domain(d3.range(5))
+      .domain(d3.range(6))
       .rangeBands([0, width - (margin * 2)], 1, 0);
 
     var yScale = d3.scale.linear()
@@ -70,17 +85,22 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
       .x(function(d,i) { return xScale(i); })
       .y(function(d,i) { return yScale(d); });
 
+    svg.append('path')
+      .datum([0,0.2,0.4,0.6,0.8,1])
+      .attr('class', 'line-of-perfect-equity')
+      .attr('d', line)
+      .attr('transform', 'translate(' + margin + ',' + margin + ')');
+
     var path = svg.append('path')
-      .datum([])
+      .datum([0,0,0,0,0,0])
       .attr('class', 'lorenz-line')
-      .attr('fill', 'none')
       .attr('d', line)
       .attr('transform', 'translate(' + margin + ',' + margin + ')');
 
     var yAxis = d3.svg.axis()
       .scale(yScale)
       .orient('left')
-      .ticks(5)
+      .ticks(6)
       .tickFormat(function(d) { return d * 100 + '%'; });
 
     svg.append('g')
@@ -91,8 +111,8 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
     var xAxis = d3.svg.axis()
       .scale(xScale)
       .orient('bottom')
-      .ticks(5)
-      .tickFormat(function(d) { return d + 1 });
+      .ticks(6)
+      .tickFormat(function(d) { return d * 20 + '%'; });
 
     svg.append('g')
       .attr('class', 'axis')
