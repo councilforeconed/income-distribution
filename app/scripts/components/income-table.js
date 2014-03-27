@@ -3,7 +3,7 @@ IncomeDistribution.IncomeTableComponent = Ember.Component.extend({
   classNames: ['panel', 'panel-default', 'income-panel'],
 
   rows: 5,
-  isHidden: true,
+  isHidden: false,
 
   changeRows: function () {
     var rows = this.get('rows');
@@ -58,6 +58,21 @@ IncomeDistribution.IncomeTableComponent = Ember.Component.extend({
       data = Array.prototype.slice.call(data);
       
       this.set('data', data);
+    },
+    
+    sortData: function () {
+      var data = this.get('data');
+      
+      data.sort(function (a, b) {
+        return d3.ascending(a,b);
+      });
+      
+      var inputs = this.$('.income-amount');
+      
+      inputs.val('');
+      inputs.each(function (i, e) {
+        $(e).val(data[i]);
+      });
     }
   }
 

@@ -1,6 +1,6 @@
 IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
   
-  tagName: 'svg',
+  classNames: ['text-right'],
   
   height: 350,
   margin: 50,
@@ -69,6 +69,7 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
     var dataset = this.get('lorenzifiedData');
 
     var svg = d3.select('#'+id)
+      .append('svg')
       .attr({
         width: width,
         height: height
@@ -85,8 +86,9 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
       .x(function(d,i) { return xScale(i); })
       .y(function(d,i) { return yScale(d); });
 
+    // Set up a line of perfect equity
     svg.append('path')
-      .datum([0,0.2,0.4,0.6,0.8,1])
+      .datum(d3.range(0,1.2,0.2))
       .attr('class', 'line-of-perfect-equity')
       .attr('d', line)
       .attr('transform', 'translate(' + margin + ',' + margin + ')');
@@ -95,7 +97,10 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
       .datum([0,0,0,0,0,0])
       .attr('class', 'lorenz-line')
       .attr('d', line)
-      .attr('transform', 'translate(' + margin + ',' + margin + ')');
+      .attr('transform', 'translate(' + margin + ',' + margin + ')')
+      .on('dblclick', function () {
+        this.parentNode.removeChild(this);
+      });
 
     var yAxis = d3.svg.axis()
       .scale(yScale)
@@ -122,6 +127,24 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
     this.set('svg', svg);
     this.set('path', path);
     this.set('line', line);
+  },
+  
+  actions: {
+    
+    'addPath': function () {
+      var margin = this.get('margin');
+      
+      var path = this.get('svg').append('path')
+        .datum([0,0,0,0,0,0])
+        .attr('class', 'lorenz-line')
+        .attr('d', this.get('line'))
+        .attr('transform', 'translate(' + margin + ',' + margin + ')')
+        .on('dblclick', function () {
+          this.parentNode.removeChild(this);
+        });
+      this.set('path', path);
+    }
+    
   }
 
 });

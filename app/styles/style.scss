@@ -18,13 +18,36 @@ html, body {
 // Lorenz Charts
 svg {
   background-color: white;
+  width: 100%;
 }
 
 .lorenz-line {
   fill: none;
-  stroke: rgb(47, 184, 255);
+  stroke: rgb(29, 188, 156);
   stroke-linecap: round;
   stroke-width: 3px;
+  opacity: 0.8;
+  &:nth-child(2n) {
+    stroke: rgb(230, 126, 33);
+  }
+  &:nth-child(3n) {
+    stroke: rgb(155, 89, 182);
+  }
+  &:nth-child(4n) {
+    stroke: rgb(231, 76, 60);
+  }
+  &:nth-child(5n) {
+    stroke: rgb(149, 165, 166);
+  }
+  &:nth-child(6n) {
+    stroke: rgb(243, 156, 38);
+  }
+  &:nth-child(7n) {
+    stroke: rgb(46, 204, 113);
+  }
+  &:nth-child(8n) {
+    stroke: rgb(52, 72, 94);
+  }
 }
 
 .line-of-perfect-equity {
@@ -32,8 +55,7 @@ svg {
   stroke-dasharray: 5;
 }
 
-.axis path,
-.axis line {
+.axis path, .axis line {
   fill: none;
   stroke: black;
   shape-rendering: crispEdges;
@@ -42,4 +64,8 @@ svg {
 .axis text {
   font-family: sans-serif;
   font-size: 11px;
+}
+
+footer {
+  color: #AAA;
 }
