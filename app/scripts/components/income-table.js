@@ -22,6 +22,13 @@ IncomeDistribution.IncomeTableComponent = Ember.Component.extend({
    willInsertElement: function() {
     this.changeRows();
    },
+   
+   keyUp: function () {
+     this.triggerAction({
+       action:'adjustIncome',
+       target: this
+     });
+   },
 
   actions: {
 
@@ -73,7 +80,8 @@ IncomeDistribution.IncomeTableComponent = Ember.Component.extend({
       inputs.each(function (i, e) {
         $(e).val(data[i]);
       });
-    }
+    },
+    
   }
 
 });
