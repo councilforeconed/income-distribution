@@ -8,9 +8,46 @@ html, body {
 
 .income-table {
   tbody > tr > td {
-    border-top: none;
+  border-top: none;
   }
   .input-group-addon {
-    background-color: #FCFCFC;
+  background-color: #FCFCFC;
   }
+}
+
+// Lorenz Charts
+svg {
+  background-color: white;
+}
+
+.lorenz-line:nth-child(1) {
+  stroke: rgb(255,0,0);
+  fill: rgba(150,150,150,0.1)
+}
+
+.lorenz-line:nth-child(2) {
+  stroke: rgb(0,255,0);
+  fill: rgba(150,150,150,0.1)
+}
+
+.lorenz-line:nth-child(3) {
+  stroke: rgb(0,0,255);
+  fill: rgba(150,150,150,0.1)
+}
+
+.lorenz-line:nth-child(4) {
+  stroke: rgb(255,0,255);
+  fill: rgba(150,150,150,0.1)
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  font-family: sans-serif;
+  font-size: 11px;
 }

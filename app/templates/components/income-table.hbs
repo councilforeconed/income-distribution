@@ -3,6 +3,10 @@
 </div>
 
 <div class="panel-body">
+    <div>
+      {{lorenz-curve data=data width=688 height=250}}
+    </div>
+  
     <div class="btn-group btn-group-xs">
       <a href="#" {{bind-attr class=":btn :btn-default isHidden::disabled"}}{{action 'showTable'}}>
         <span class="glyphicon glyphicon-eye-open"></span> Show Table
