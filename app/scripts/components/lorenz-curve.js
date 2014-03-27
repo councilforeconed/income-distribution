@@ -91,7 +91,8 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
     var xAxis = d3.svg.axis()
       .scale(xScale)
       .orient('bottom')
-      .ticks(5);
+      .ticks(5)
+      .tickFormat(function(d) { return d + 1 });
 
     svg.append('g')
       .attr('class', 'axis')
