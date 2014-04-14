@@ -15,6 +15,16 @@ html, body {
   }
 }
 
+.panel > .panel-body + .table, .panel > .panel-body + .table-responsive {
+  border-top: none;
+}
+
+h3.household-income-table-title {
+  margin: 2rem 0 0 0;
+  border-top: 1px solid #DDD;
+  padding: 2rem 0 0 0;
+}
+
 // Lorenz Charts
 svg {
   background-color: white;

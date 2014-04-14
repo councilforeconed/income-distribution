@@ -7,7 +7,7 @@
       {{lorenz-curve data=data height=250}}
     </div>
     <a href="#" {{bind-attr class=":btn :btn-primary :btn-xs isHidden:hidden"}} {{action 'sortData'}}>
-      <span class="glyphicon glyphicon-sort"></span> Sort Data
+      <span class="glyphicon glyphicon-sort"></span> Sort Household Incomes in Ascending Order
     </a>
     <div {{bind-attr class=":btn-group :btn-group-xs isHidden:hidden"}}>
       <a href="#" {{bind-attr class=":btn :btn-default isMaxedOut:disabled"}}{{action 'incrementRows'}}>
@@ -20,14 +20,7 @@
     <a href="#" {{bind-attr class=":btn :btn-default :btn-xs isHidden:hidden"}} {{action 'clearTable'}}>
       <span class="glyphicon glyphicon-trash"></span> Clear and Reset
     </a>
-    <div class="btn-group btn-group-xs">
-      <a href="#" {{bind-attr class=":btn :btn-default isHidden::disabled"}}{{action 'showTable'}}>
-        <span class="glyphicon glyphicon-eye-open"></span> Show Table
-      </a>
-      <a href="#" {{bind-attr class=":btn :btn-default isHidden:disabled"}} {{action 'hideTable'}}>
-        <span class="glyphicon glyphicon-eye-close"></span> Hide Table
-      </a>
-    </div>
+    <h3 class="household-income-table-title">Household Incomes</h3>
 </div>
 
 <table {{bind-attr class=":table :income-table isHidden:hidden"}}>
