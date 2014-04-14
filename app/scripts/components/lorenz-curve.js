@@ -1,6 +1,6 @@
 IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
   
-  classNames: ['text-right'],
+  classNames: ['text-right', 'lorenz-curve-chart'],
   
   height: 350,
   margin: 50,

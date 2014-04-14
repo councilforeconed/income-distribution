@@ -23,6 +23,11 @@ IncomeDistribution.IncomeTableComponent = Ember.Component.extend({
     this.changeRows();
    },
    
+   didInsertElement: function () {
+     var chart = Ember.View.views[this.$('.lorenz-curve-chart').get(0).id];
+     this.set('chart', chart);
+   },
+   
    keyUp: function () {
      this.triggerAction({
        action:'adjustIncome',
@@ -50,7 +55,7 @@ IncomeDistribution.IncomeTableComponent = Ember.Component.extend({
     
     clearTable: function () {
       this.$('.income-amount').val('');
-      this.set('totalIncome', 0);
+      this.set('data', []);
     },
 
     adjustIncome: function () {
