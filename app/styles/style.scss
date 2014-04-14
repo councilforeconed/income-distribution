@@ -25,10 +25,20 @@ h3.household-income-table-title {
   padding: 2rem 0 0 0;
 }
 
+.quintiles {
+  th {
+    font-size: 1.3rem;
+  }
+  th, td {
+    text-align: center;
+  }
+}
+
 // Lorenz Charts
 svg {
   background-color: white;
   width: 100%;
+  margin-bottom: 2rem;
 }
 
 .lorenz-line {

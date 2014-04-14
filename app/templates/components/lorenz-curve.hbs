@@ -1,1 +1,25 @@
-<a href="#" class="btn btn-default" {{action 'addPath'}}><span class="glyphicon glyphicon-plus"></span> Graph Another Set of Household Incomes</a>
+<div class="row">
+    <div class="col-md-8">
+        <table class="table quintiles table-condensed">
+            <thead>
+                <tr>
+                    <th>1<sup>st</sup> Quintile (0-20%)</th>
+                    <th>2<sup>nd</sup> Quintile (20-40%)</th>
+                    <th>3<sup>rd</sup> Quintile (40-60%)</th>
+                    <th>4<sup>th</sup> Quintile (60-80%)</th>
+                    <th>5<sup>th</sup> Quintile (80-100%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {{#each quintiles}}
+                    <td>{{percentage this}}</td>
+                    {{/each}}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <a href="#" class="btn btn-default btn-block" {{action 'addPath'}}><span class="glyphicon glyphicon-plus"></span> Graph Another Set of Household Incomes</a>
+    </div>
+</div>

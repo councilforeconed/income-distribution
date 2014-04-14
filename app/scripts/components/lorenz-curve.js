@@ -2,7 +2,9 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
   
   classNames: ['text-right', 'lorenz-curve-chart'],
   
-  height: 350,
+  height: 300,
+  verticalMargin: 20,
+  horizontalMargin: 50,
   margin: 50,
   
   lorenzifiedData: function () {
@@ -33,6 +35,10 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
      
   }.property('data'),
   
+  quintiles: function () {
+    return this.get('lorenzifiedData').slice(1,6);
+  }.property('lorenzifiedData'),
+  
   updateChart: function () {
     
     var id = this.$().attr('id');
@@ -62,7 +68,8 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
     
     var width = this.$().parent().get(0).offsetWidth;
     var height = this.get('height');
-    var margin = this.get('margin');
+    var horizontalMargin = this.get('horizontalMargin');
+    var verticalMargin = this.get('verticalMargin');
     
     var id = this.$().attr('id');
     
@@ -77,10 +84,10 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
 
     var xScale = d3.scale.ordinal()
       .domain(d3.range(6))
-      .rangeBands([0, width - (margin * 2)], 1, 0);
+      .rangeBands([0, width - (horizontalMargin * 2)], 1, 0);
 
     var yScale = d3.scale.linear()
-      .range([height - (margin * 2), 0]);
+      .range([height - (verticalMargin * 2), 0]);
 
     var line = d3.svg.line()
       .x(function(d,i) { return xScale(i); })
@@ -91,13 +98,13 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
       .datum(d3.range(0,1.2,0.2))
       .attr('class', 'line-of-perfect-equity')
       .attr('d', line)
-      .attr('transform', 'translate(' + margin + ',' + margin + ')');
+      .attr('transform', 'translate(' + horizontalMargin + ',' + verticalMargin + ')');
 
     var path = svg.append('path')
       .datum([0,0,0,0,0,0])
       .attr('class', 'lorenz-line')
       .attr('d', line)
-      .attr('transform', 'translate(' + margin + ',' + margin + ')')
+      .attr('transform', 'translate(' + horizontalMargin + ',' + verticalMargin + ')')
       .on('dblclick', function () {
         this.parentNode.removeChild(this);
       });
@@ -110,7 +117,7 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
 
     svg.append('g')
       .attr('class', 'axis')
-      .attr('transform', 'translate(' + (margin * 0.9) + ',' + margin + ')')
+      .attr('transform', 'translate(' + (horizontalMargin * 0.9) + ',' + verticalMargin + ')')
       .call(yAxis);
 
     var xAxis = d3.svg.axis()
@@ -121,7 +128,7 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
 
     svg.append('g')
       .attr('class', 'axis')
-      .attr('transform', 'translate(' + margin + ',' + (height - margin * 0.9) + ')')
+      .attr('transform', 'translate(' + horizontalMargin + ',' + (height - verticalMargin * 0.9) + ')')
       .call(xAxis);
       
     this.set('svg', svg);
@@ -132,13 +139,14 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
   actions: {
     
     'addPath': function () {
-      var margin = this.get('margin');
+      var horizontalMargin = this.get('horizontalMargin');
+      var verticalMargin = this.get('verticalMargin');
       
       var path = this.get('svg').append('path')
         .datum([0,0,0,0,0,0])
         .attr('class', 'lorenz-line')
         .attr('d', this.get('line'))
-        .attr('transform', 'translate(' + margin + ',' + margin + ')')
+        .attr('transform', 'translate(' + horizontalMargin + ',' + verticalMargin + ')')
         .on('dblclick', function () {
           this.parentNode.removeChild(this);
         });
