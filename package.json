@@ -1,6 +1,12 @@
 {
   "name": "income-distribution",
   "version": "0.0.0",
+  "scripts": {
+    "start": "grunt server",
+    "build": "grunt build",
+    "postinstall": "bower install",
+    "deploy": "grunt build && scp -r dist/* cee:~/technology/income-distribution"
+  },
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
