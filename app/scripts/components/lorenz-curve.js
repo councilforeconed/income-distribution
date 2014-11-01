@@ -146,10 +146,8 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
         .datum([0,0,0,0,0,0])
         .attr('class', 'lorenz-line')
         .attr('d', this.get('line'))
-        .attr('transform', 'translate(' + horizontalMargin + ',' + verticalMargin + ')')
-        .on('dblclick', function () {
-          this.parentNode.removeChild(this);
-        });
+        .attr('transform', 'translate(' + horizontalMargin + ',' + verticalMargin + ')');
+
       this.set('path', path);
     }
     
