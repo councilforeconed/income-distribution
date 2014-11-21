@@ -5,21 +5,7 @@
 <div class="panel-body">
     <div>
       {{lorenz-curve data=data height=250}}
-    </div>
-    <a href="#" {{bind-attr class=":btn :btn-primary :btn-xs isHidden:hidden"}} {{action 'sortData'}}>
-      <span class="glyphicon glyphicon-sort"></span> Sort Household Incomes in Ascending Order
-    </a>
-    <div {{bind-attr class=":btn-group :btn-group-xs isHidden:hidden"}}>
-      <a href="#" {{bind-attr class=":btn :btn-default isMaxedOut:disabled"}}{{action 'incrementRows'}}>
-        <span class="glyphicon glyphicon-plus"></span> Add Row
-      </a>
-      <a href="#" {{bind-attr class=":btn :btn-default isBottomedOut:disabled"}} {{action 'decrementRows'}}>
-        <span class="glyphicon glyphicon-minus"></span> Remove Row
-      </a>
-    </div>
-    <a href="#" {{bind-attr class=":btn :btn-default :btn-xs isHidden:hidden"}} {{action 'clearTable'}}>
-      <span class="glyphicon glyphicon-trash"></span> Clear and Reset
-    </a>
+     </div>
     <h3 class="household-income-table-title">Household Incomes</h3>
 </div>
 
@@ -33,7 +19,7 @@
           <div class="input-group">
             <span class="input-group-addon">$</span>
             <input type="number"
-              {{action "adjustIncome" on="change"}} 
+              {{action "adjustIncome" on="change"}}
               class="form-control income-amount"
               min="0"
               placeholder="Income"
@@ -46,3 +32,7 @@
     {{/loop}}
   </tbody>
 </table>
+
+ <a href="#" {{bind-attr class=":btn :btn-default :btn-xs :btn-block isHidden:hidden"}} {{action 'sortData'}}>
+   <span class="glyphicon glyphicon-sort"></span> Sort Household Incomes in Ascending Order
+ </a>

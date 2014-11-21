@@ -1,15 +1,15 @@
 IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
-  
+
   classNames: ['text-right', 'lorenz-curve-chart'],
-  
+
   height: 300,
   verticalMargin: 20,
   horizontalMargin: 50,
   margin: 50,
-  
+
   lorenzifiedData: function () {
     var data = this.get('data');
-    
+
     data = data.sort(function (a,b) {
   	  return d3.ascending(a, b);
     });
@@ -27,23 +27,23 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
     }).map(function (quintile, index, data) {
       return quintile + d3.sum(data.slice(0, index));
      });
-     
+
      // Prepend the data to account for 0% of the population.
      lorenzifiedData.unshift(0);
-     
+
      return lorenzifiedData;
-     
+
   }.property('data'),
-  
+
   quintiles: function () {
     return this.get('lorenzifiedData').slice(1,6);
   }.property('lorenzifiedData'),
-  
+
   updateChart: function () {
-    
+
     var id = this.$().attr('id');
     var data = this.get('lorenzifiedData');
-    
+
     // If the data doesn't is free of NaNs, update the graph.
     if (!_.some(data, _.isNaN)) {
       this.get('path')
@@ -60,19 +60,19 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
           .ease("linear")
         .attr('d', this.get('line'));
     }
-    
-         
+
+
   }.observes('lorenzifiedData'),
-  
+
   didInsertElement: function () {
-    
+
     var width = this.$().parent().get(0).offsetWidth;
     var height = this.get('height');
     var horizontalMargin = this.get('horizontalMargin');
     var verticalMargin = this.get('verticalMargin');
-    
+
     var id = this.$().attr('id');
-    
+
     var dataset = this.get('lorenzifiedData');
 
     var svg = d3.select('#'+id)
@@ -130,18 +130,18 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
       .attr('class', 'axis')
       .attr('transform', 'translate(' + horizontalMargin + ',' + (height - verticalMargin * 0.9) + ')')
       .call(xAxis);
-      
+
     this.set('svg', svg);
     this.set('path', path);
     this.set('line', line);
   },
-  
+
   actions: {
-    
-    'addPath': function () {
+
+    addPath: function () {
       var horizontalMargin = this.get('horizontalMargin');
       var verticalMargin = this.get('verticalMargin');
-      
+
       var path = this.get('svg').append('path')
         .datum([0,0,0,0,0,0])
         .attr('class', 'lorenz-line')
@@ -151,8 +151,15 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
           this.parentNode.removeChild(this);
         });
       this.set('path', path);
-    }
-    
+      $('.income-amount').val('');
+      this.set('data', []);
+    },
+
+    clearTable: function () {
+      $('.income-amount').val('');
+      this.set('data', []);
+    },
+
   }
 
 });
