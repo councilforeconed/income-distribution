@@ -157,6 +157,7 @@ IncomeDistribution.LorenzCurveComponent = Ember.Component.extend({
 
     clearTable: function () {
       $('.income-amount').val('');
+      $('.lorenz-line').remove();
       this.set('data', []);
     },
 
