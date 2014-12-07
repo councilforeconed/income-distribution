@@ -14,9 +14,9 @@
             <tbody>
                 <tr>
                     <td></td>
-                    {{#each quintiles}}
-                    <td><input type="text" class="form-control"></td>
-                    {{/each}}
+                    {{#loop 5}}
+                    <td>{{quintile-input}}</td>
+                    {{/loop}}
                 </tr>
             </tbody>
         </table>

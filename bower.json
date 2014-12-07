@@ -2,8 +2,9 @@
   "name": "income-distribution",
   "version": "0.0.0",
   "dependencies": {
-    "ember": "1.3.2",
-    "handlebars": "1.2.1",
+    "ember": "1.8.1",
+    "jquery": "1.11",
+    "handlebars": "1.0.0",
     "bootstrap-sass": "~3.0.0",
     "numeral": "~1.5.3",
     "d3": "~3.4.3",
